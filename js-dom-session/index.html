@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class=container>
+    <h1 id="title1">js</h1>
+    <h1 class="title2">자바스크립트</h1>
+    <h2 class="clock"></h2>
+  </div>
+<script>
+  const title1 = document.querySelector('#title1')
+  title1.style.color = 'red'
+
+  const title2 = document.querySelector('.title2')
+  title2.style.color = 'blue'
+
+  //body의 색상이 100ms마다 무작위로 변하게 만들기 
+  const getRandomColor = () => {
+    const hexa = '0123456789abcdef'
+    let randomHexa = ''
+
+    for(let i=0; i<6; i++) {
+      randomHexa += hexa.charAt(Math.floor(Math.random() * hexa.length))
+    }
+    return '#' + randomHexa
+  }
+  
+  /*
+    let i = 0
+  
+    while (i < 6) {
+      randomHexa += hexa.charAt(Math.floor(Math.random() * hexa.length))
+      i ++ 
+    }
+    return '#' + randomHexa
+  }
+  */
+  
+  setInterval(() => {
+    document.querySelector('body').style.backgroundColor = getRandomColor()}, 100)
+   
+  
+  //00시 00분 00초 형식으로 시계 만들기 
+  const clockTitle = document.querySelector('.clock')
+
+  const getTime = () => {
+    const date = new Date()
+    const hours = date.getHours()
+    const minutes = date.getMinutes()
+    const seconds = date.getSeconds()
+
+    clockTitle.innerText = `${hours<10 ? `0${hours}` : hours}시 ${
+      minutes<10 ? `0${minutes}` : minutes}분 ${
+        seconds<10 ? `0${seconds}` : seconds}초`
+  }
+
+  const initTime = () => {
+    getTime();
+    setInterval(getTime, 100)
+  }
+  initTime()
+
+  /*
+  const title1 = document.getElementById('title1')
+  title1.innerText = '바꾼 내용'
+
+  const title2 = document.getElementsByClassName('title2')  
+  title2[0].innerText = 'changed'
+  
+
+  const container = document.querySelector('.container')
+  const title1 = container.querySelector('#title1')
+  title1.style.color = 'red'
+  
+  const title2 = container.querySelector('.title2')
+  title2.style.color = 'blue'
+
+  const body = document.querySelector('body')
+  setInterval(function() {
+    body.style.backgroundColor = 
+      body.style.backgroundColor === 'blue' ? 'green' : 'blue'
+  }, 1000)
+  */
+</script>
+</body>
+</html>
